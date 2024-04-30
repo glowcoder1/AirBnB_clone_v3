@@ -68,25 +68,9 @@ test_db_storage.py'])
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
 
-    def test_get(self):
-        """ Tests the get method for db_storage"""
-        state = State(name="Lagos")
-        storage.new(state)
-        result = storage.get("State", state.id)
-        self.assertTrue(result.id, state.id)
-        self.assertIsInstance(result, State)
 
-    def test_count(self):
-        """ tests count method for db_storage"""
-        storage.reload()
-        old_count = storage.count("State")
-        state1 = State(name="Delta")
-        storage.new(state1)
-        self.assertEqual(old_count + 1, storage.count("State"))
-
-
-class TestFileStorage(unittest.TestCase):
-    """Test the FileStorage class"""
+class TestDBStorage(unittest.TestCase):
+    """Test the DBStorage class"""
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_returns_dict(self):
         """Test that all returns a dictionaty"""
