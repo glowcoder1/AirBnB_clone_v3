@@ -20,8 +20,8 @@ def teardown_context(exception):
 
 if __name__ == "__main__":
     # Configure host and Port
-    host = os.getenv("HBNB_API_HOST", "0.0.0.0")
-    port = int(os.getenv("HBNB_API_PORT", 5000))
+    host = getenv("HBNB_API_HOST", "0.0.0.0")
+    port = int(getenv("HBNB_API_PORT", 5000))
 
 # Run the Flask server
     app.run(host=host, port=port, treaded=True)
