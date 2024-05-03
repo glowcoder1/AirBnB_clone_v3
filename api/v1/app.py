@@ -19,7 +19,6 @@ app.register_blueprint(app_views)
 def teardown_context(exception):
     storage.close()
 
-
 if __name__ == "__main__":
     """Configure host and Port"""
     host = getenv("HBNB_API_HOST", "0.0.0.0")
@@ -27,3 +26,4 @@ if __name__ == "__main__":
 
     """ Run the Flask server """
     app.run(host=host, port=port, threaded=True)
+    
