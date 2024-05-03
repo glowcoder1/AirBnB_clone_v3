@@ -52,6 +52,16 @@ class BaseModel:
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
                                          self.__dict__)
 
+    def __is_serializable(self, obj_v):
+        """
+            private mtd checks if object is serializable
+        """
+        try:
+            obj_to_str = json.dumps(obj_v)
+            return obj_to_str is not None and isinstance(obj_to_str, str)
+        except Exception:
+            return False
+
     def save(self):
         """updates the attribute 'updated_at' with the current datetime"""
         self.updated_at = datetime.utcnow()
@@ -73,3 +83,18 @@ class BaseModel:
     def delete(self):
         """delete the current instance from the storage"""
         models.storage.delete(self)
+
+    def to_json(self):
+        """returns json rep of selff"""
+        json_dict = {}
+        for key, value in (self.__dict__).items():
+            if (self.__is_serializable(value)):
+                json_dict[key] = value
+            else:
+                json_dict[key] = str(value)
+        json_dict['__class__'] = type(self).__name__
+        if '_sa_instance_state' in json_dict:
+            json_dict.pop('_sa_instance_state')
+        if models.storage_t == "db" and 'password' in json_dict:
+            json_dict.pop('password')
+        return json_dict
