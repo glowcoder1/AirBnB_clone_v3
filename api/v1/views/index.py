@@ -13,6 +13,7 @@ from models import storage
 def get_status():
     return jsonify({'status': "OK"})
 
+
 @app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def stats():
     """
