@@ -13,6 +13,8 @@ app.register_blueprint(app_views)
 
 
 """ app context """
+
+
 @app.teardown_appcontext
 def teardown_context(exception):
     storage.close()

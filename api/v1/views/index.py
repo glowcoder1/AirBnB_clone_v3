@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" index """
+"""
+index
+"""
 
 
 from flask import jsonify
