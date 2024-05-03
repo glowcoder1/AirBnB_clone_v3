@@ -48,7 +48,7 @@ def state_by_id(state_id):
     returns state obj with the specified id or error
     """
 
-    data  = storage.get("State", str(state_id))
+    data = storage.get("State", str(state_id))
 
     if data is None:
         abort(404)
